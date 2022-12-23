@@ -1,3 +1,62 @@
+# Bookstore management project
+
+An interface used by the librarian for the following operations:
+Add a book 
+Add a customer 
+Add borrow a book from the store
+
+# Using the following packages:
+
+back:
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+SQLAlchemy
+front:
+use of react with the following packages:
+axios
+gh-pages
+This project allows us to enter data into a gui interface and transfer the information to a data server that is linked between them 
+
+# Tables in the project and their links:
+
+•	Books :
+
+•	Id (PK)
+•	Name
+•	Author 
+•	Year Published 
+•	Type (1/2/3)
+
+•	Customers:
+
+•	Id (PK)
+•	Name
+•	City
+•	Age
+
+•	Loans:
+
+•	CustID 
+•	BookID
+•	Loandate
+•	Returndate
+
+# The piletable options in the project are:
+
+•	Add a new customer
+•	Add a new book
+•	Loan a book
+•	Return a book
+•	Display all books
+•	Display all customers
+•	Display all loans
+•	Display late loans
+•	Find book by name
+•	Find customer by name
+•	Remove book
+•	Remover customer
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
