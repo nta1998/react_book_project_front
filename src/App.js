@@ -13,6 +13,9 @@ const App=()=> {
       <NavBar></NavBar>
         <div>
         <Switch>
+        <Route  exact path="">
+            <Books></Books>
+          </Route>
         <Route  exact path="/Books">
             <Books></Books>
         </Route>
