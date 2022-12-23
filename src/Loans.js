@@ -13,13 +13,15 @@ const Loans = () => {
     const [book_id, setbook_id] = useState("")
     const [dayleft, setdayleft] = useState(0)
     const [wrapper, setwrapper] = useState("")
+    const [mode, setmode] = useState("")
+    ///////////////////////////// alert  //////////////////////////////
     const alert = (message, type) => {
         setwrapper([`
             <div class="alert alert-${type} alert-dismissible" role="alert">
                <div>${message}</div>
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>`
-       ] )
+        ])
     }
     ///////////////////////////// Submit Cancel refresh //////////////////////////////
     const handleSubmit = event => {
@@ -30,20 +32,20 @@ const Loans = () => {
             alert("Must choose Customer Name", "danger")
         }
         if (dayleft < 0) {
-            alert("Must choose Book Name","danger")
+            alert("Must choose Book Name", "danger")
         }
         if (date_input == "") {
-            alert("Must choose a date","danger")
+            alert("Must choose a date", "danger")
         }
         else {
             add()
-            alert("The book loan has been successfully added","success")
+            alert("The book loan has been successfully added", "success")
         }
     }
     ///////////////////////// A function that adds days to a date //////////////////    
     let date_Return = ""
     const addDays = (date, days) => {
-       
+
 
         const result = new Date(String(date));
         result.setDate(result.getDate() + parseInt(days));
@@ -98,6 +100,7 @@ const Loans = () => {
     /////////////////////////////////// read ///////////////////////////////////  
     const show_all = async () => {
         await axios.get(MY_SERVER + '/Loans').then((res) => setdata(res.data))
+        setmode("all loans")
 
     }
     //////////////////////////////////////////////////////////////////////  
@@ -106,15 +109,17 @@ const Loans = () => {
     }
     //////////////////////////////////////////////////////////////////////  
     const Books_id = () => {
-        axios.get(MY_SERVER + '/Books').then((res) => setbook_id(res.data.map(book => `<option value=${[book.Type,book.id]} >${book.Name}</option>`).join("")))
+        axios.get(MY_SERVER + '/Books').then((res) => setbook_id(res.data.map(book => `<option value=${[book.Type, book.id]} >${book.Name}</option>`).join("")))
     }
     //////////////////////////////////////////////////////////////////////  
     const show_all_active = async () => {
-        await axios.get(MY_SERVER + '/Loans').then((res) => setdata(res.data.filter(x => x.returned == 0 )))
+        await axios.get(MY_SERVER + '/Loans').then((res) => setdata(res.data.filter(x => x.returned == 0)))
+        setmode("all active loans")
     }
     //////////////////////////////////////////////////////////////////////  
     const show_all_late = async () => {
         await axios.get(MY_SERVER + '/Loans').then((res) => setdata(res.data.filter(x => diff(x.Returndate) > 0)))
+        setmode("all late loans")
     }
     //////////////////////////////////// create //////////////////////////////////     
     const add = async () => {
@@ -122,13 +127,13 @@ const Loans = () => {
         addDays(date_input, dayleft)
         format_d(date_input)
         axios.post(MY_SERVER + '/Loans/add', { 'Loandate': date_input, 'Returndate': date_Return, 'customers_id': customerid, 'BookID': booktype })
-   
+
     }
     ///////////////////////////////////// delete /////////////////////////////////     
     const del_item = async (id) => {
         await axios.delete(MY_SERVER + '/Loans/change/' + id)
         await show_all()
-        alert("The loan details have been deleted","danger")
+        alert("The loan details have been deleted", "danger")
     }
     ////////////////////////////////// update ////////////////////////////////////      
     const upd = async (id) => {
@@ -153,17 +158,17 @@ const Loans = () => {
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <label className="input-group-text" >Customer Name</label>
-                    <select className="form-select"  onChange={event => setcustomerid(event.target.value)} dangerouslySetInnerHTML={{ __html: cos_id }} >
+                    <select className="form-select" onChange={event => setcustomerid(event.target.value)} dangerouslySetInnerHTML={{ __html: cos_id }} >
                     </select>
                 </div>
                 <div className="input-group mb-3">
                     <label className="input-group-text" >Book Name</label>
-                    <select className="form-select"  onChange={event=>type_2(event)} onMouseEnter={event=>type_2(event)} dangerouslySetInnerHTML={{ __html: book_id }}>
+                    <select className="form-select" onChange={event => type_2(event)} onMouseEnter={event => type_2(event)} dangerouslySetInnerHTML={{ __html: book_id }}>
                     </select>
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text">Londate</span>
-                    <input type="date"  minLength={2} className="form-control" onChange={e => setdate_input(e.target.value)} ></input>
+                    <input type="date" minLength={2} className="form-control" onChange={e => setdate_input(e.target.value)} ></input>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: wrapper }}></div>
                 <button className="btn btn-success" type='submit'>Add Loans</button>
@@ -173,7 +178,13 @@ const Loans = () => {
 
             </form>
             <h1>Returndate:{view}</h1>
-             {/* //////////////////////////////Click button to display the information about each object in the list////////////////////////////////////////////// */}
+            {/* //////////////////////////////Click button to display the information about each object in the list////////////////////////////////////////////// */}
+            <div className="card">
+                <div className="card-header">
+                display mode: {mode}
+                </div>
+            </div>
+            <br></br>
             {
                 data.map((pr, i) =>
                     <div key={i} className="accordion accordion-flush">
