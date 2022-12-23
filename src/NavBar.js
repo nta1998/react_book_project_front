@@ -14,13 +14,13 @@ const NavBar = () => {
            <div className="collapse navbar-collapse" id="navbarNav">
              <ul className="navbar-nav">
                <li className="nav-item">
-               <Link className="nav-link" to='/'>Books</Link>
+               <Link className="nav-link" to='/react_book_project_front'>Books</Link>
                </li>
                <li className="nav-item">
-               <Link className="nav-link" to='/Coustomers'>Customers</Link>
+               <Link className="nav-link" to='/react_book_project_front/Coustomers'>Customers</Link>
                </li>
                <li className="nav-item">
-               <Link className="nav-link" to='/Loans'>Loans</Link>
+               <Link className="nav-link" to='/react_book_project_front/Loans'>Loans</Link>
                </li>
              </ul>
            </div>

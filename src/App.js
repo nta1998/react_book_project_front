@@ -13,13 +13,13 @@ const App=()=> {
       <NavBar></NavBar>
         <div>
         <Switch>
-        <Route  exact path="http://nta1998.github.io/react_book_project_front">
+        <Route  exact path="/react_book_project_front">
             <Books></Books>
         </Route>
-        <Route  exact path="http://nta1998.github.io/react_book_project_front/Coustomers">
+        <Route  exact path="/react_book_project_front/Coustomers">
           <Customer></Customer>
         </Route>
-        <Route  exact path="http://nta1998.github.io/react_book_project_front/Loans">
+        <Route  exact path="/react_book_project_front/Loans">
           <Loans></Loans>
         </Route>
         </Switch>
