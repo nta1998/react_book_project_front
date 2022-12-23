@@ -13,7 +13,7 @@ const App=()=> {
       <NavBar></NavBar>
         <div>
         <Switch>
-        <Route  exact path="/">
+        <Route  exact path="/Books">
             <Books></Books>
         </Route>
         <Route  exact path="/Coustomers">

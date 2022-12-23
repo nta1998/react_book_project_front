@@ -184,8 +184,8 @@ const Loans = () => {
                                 </button>
                             </h2>
                             <div id={"flush-collapse" + i} className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">customers :{pr.cosName} <br></br>
-                                    BookID: {pr.bookName} <br></br>Loandate:{pr.Loandate} <br></br>
+                                <div className="accordion-body">customer name :{pr.cosName} <br></br>
+                                    Book nmae: {pr.bookName} <br></br>Loandate:{pr.Loandate} <br></br>
                                     Returndate:{pr.Returndate}<br></br>
                                     <button className="btn btn-success" onClick={() => upd(pr.id)}>update</button>
                                     <button style={{ margin: '0.3%' }} className="btn btn-secondary" onClick={() => Returning(pr.id)}>Returning a book</button>
